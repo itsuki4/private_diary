@@ -1,63 +1,36 @@
 {% extends 'diary/base.html'%}
 {% load static%}
 
-{% block title %}{% endblock %}
+{% block title %}お問い合わせ|private Diary{% endblock %}
 
 {% block contents %}
 <!-- Content section 1-->
 <section id="scroll">
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/01.jpg' %}"
-                        alt="..." /></div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">For those about to rock...</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                        sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
+            <from method="POST">
+                {% csrf_token %}
+
+                {{ form.non_field_errors}}
+
+                {% for field in form %}
+                <div class="form-group row">
+                    <label for="{{ field.id_for_label }}" class="col-sm-4 col-from-label">
+                        <strong>{{ field.label_tag }}</strong>>
+                    </label>
+                    <div class="col-sm-8">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Content section 2-->
-<section>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/02.jpg' %}"
-                        alt="..." /></div>
-            </div>
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <h2 class="display-4">We salute you!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                        sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
+                {% endfor %}
+
+                <div class="offset-sm-4 col-sm-8">
+                    <button class="btn btn-primary" type="submit">
+                        送信
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Content section 3-->
-<section>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/03.jpg' %}"
-                        alt="..." /></div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">Let there be rock!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                        sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
+            </from>
         </div>
     </div>
 </section>
