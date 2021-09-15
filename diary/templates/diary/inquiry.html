@@ -4,10 +4,9 @@
 {% block title %}お問い合わせ|private Diary{% endblock %}
 
 {% block contents %}
-<!-- Content section 1-->
-<section id="scroll">
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class = "my-div-style">
             <from method="POST">
                 {% csrf_token %}
 
@@ -31,6 +30,7 @@
                     </button>
                 </div>
             </from>
+            </div>
         </div>
     </div>
 </section>
