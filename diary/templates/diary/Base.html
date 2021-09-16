@@ -33,7 +33,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
-                    <a class ="nav-link" href="{% url 'diary:inquiry'%}">INQUIRY</a>
+                    <a class="nav-link" href="{% url 'diary:inquiry'%}">INQUIRY</a>
                 </ul>
             </div>
         </div>
@@ -41,13 +41,20 @@
     <!-- Header-->
     {% block header %}{% endblock %}
 
-    {%if massages %}
+    {% if messages %}
     <div class="container">
         <div class="row">
             <div class="my-div-style">
-                <ul class ="massages" style="list-style: none;"
-        {% for msg in massages %}
-        {(msg)}
+                <ul class="massages" style="list-style: none;">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+                        {{message}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
     {% endif %}
     <!-- Content -->
     {% block contents %}{% endblock %}
@@ -62,8 +69,7 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <!--My style-->
-    <link rel = "stylesheet" type = "text/css" href="{%static
-        'css/mystyle.css'%}"
-</body>
+    <link rel="stylesheet" type="text/css" href="{%static
+        'css/mystyle.css'%}" </body>
 
 </html>
