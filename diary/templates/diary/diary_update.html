@@ -1,0 +1,23 @@
+% extends 'diary/base.html'%}
+{% load static%}
+
+{% block title %}日記編集|private Diary{% endblock %}
+
+{%block active_diary_list%}active{%endlock%}
+
+{% block contents %}
+    <div class="container">
+        <div class="row">
+            <div class = "my-div-style">
+            <from method="POST" enctype='multipart/form-date'>
+                {% csrf_token %}
+                <table class ="table">
+                    {{form.as_table}}
+                </table>
+                <button class ="btn btn-primary"type="submit">更新</button>
+                <a class="bth bth-secondary ml-2" href="{%url'diary:diary_detail}'object.pk%}">キャンセル</a>
+                </from>
+            </div>
+        </div>
+    </div>
+    {%endlock%}
