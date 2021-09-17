@@ -1,14 +1,14 @@
 {% extends 'base.html'%}
 {%load static%}
 
-{%block title%}日記一覧|Private Diary{%endlock%}
+{%block title%}日記一覧|Private Diary{%endblock%}
 
-{% block active_diary_list%}active{%endlock%}
+{% block active_diary_list%}active{%endblock%}
 
 {%block contents%}
 <div class ="container">
     <div class ="row">
-        <div class ="my-div-style">
+        <div class ="my-div-style w-100">
             <div class = "col-lg-8 col-md-10 mx-auto">
                 <div class = "clearfix">
                     <a class = "bth bth-primary float-right"href="{%url 'diary:diary_create'%}">新規作成</a>
@@ -26,10 +26,49 @@
                 <p class="post-mate">{{diary.created_at}}</p>
             </div>
             <hr>
-            {%empy%}
+            {%empty%}
             <p>日記がありません。</p>
-            {% endfor %}
+            {%endfor%}
+
+            {%if is_paginated%}
+            <ul class ="pagination">
+                {%if page_obj.has_previous%}
+                <li class="page-item">
+                    <a class="page-link"href="?page={{page_obj.privious_page_number}}">
+                        <span aria-hidden="true">
+                            &laquo;
+                        </span>
+                    </a>
+                </li>
+                {%endif%}
+
+                {% for page_num in page_obj.paginator.page_range%}
+                {% if page_obj.number==page_num%}
+                <li class="page-item active">
+                    <a class="page-link"href="#">
+                    {{page_num}}
+                </a>
+                </li>
+                {%else%}
+                <li class="page-item">
+                    <a class ="page-link"href="?page={{page_num}}">
+                        {{page_num}}
+                    </a>
+                </li>
+                {%endif%}
+                {%endfor%}
+
+                {%if page_obj.has_next%}
+                <li class="page-item">
+                    <a class="page-link"href="?page={{page_obj.next_page_num_number}}">
+                        <span aria-hidden="true">&aquo;</span>
+                    </a>
+                </li>
+                {%endif%}
+            </ul>
+            {%endif%}
             </div>
         </div>
     </div>
 </div>
+{%endblock%}
