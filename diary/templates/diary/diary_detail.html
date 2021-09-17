@@ -1,4 +1,4 @@
-{% extends 'Base.html'%}
+{% extends 'diary/base.html'%}
 {% load static%}
 
 {%block title%}日記詳細｜Private Diary{%endblock%}
@@ -46,6 +46,7 @@
                 {%endif%}
             </div>
             <div class="col-3">
+                {%if object.photo3%}
                 <omg src="{{object.photo3.url}}"width="200"
                 height="200"/>
                 {%endif%}
@@ -74,8 +75,8 @@
             </div>
         </div>
 
-        <a class="btn btn-success mt-5 mb-3"href="{%url 'diary:diary_update'object.pk%}">編集</a>
-        <a class="bth btn-danger mt-5 mt-2 mb-3"href="{%url'diary:diary_delete'object.pk%}">削除</a>
+        <a class="btn btn-success mt-5 mb-3"href="{% url 'diary:diary_update' object.pk %}">編集</a>
+        <a class="bth btn-danger mt-5 mt-2 mb-3"href="{%url 'diary:diary_delete' object.pk %}">削除</a>
     </div>
 </div>
 {%endblock%}
